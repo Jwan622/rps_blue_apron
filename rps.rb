@@ -9,4 +9,4 @@ end
 
 input_stream = $stdin if ARGV[1].nil?
 output_stream = $stdout if ARGV[2].nil?
-RpsRunner.start(ARGV[0], input_stream, output_stream)
+RpsRunner.new.start(ARGV[0], input_stream, output_stream)

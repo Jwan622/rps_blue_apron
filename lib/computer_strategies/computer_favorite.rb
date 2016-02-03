@@ -1,4 +1,6 @@
-class ComputerFavorite
+require_relative 'computer'
+
+class ComputerFavorite < Computer
   attr_reader :strategy_name
 
   def initialize
@@ -6,10 +8,11 @@ class ComputerFavorite
   end
 
   def make_decision(user_input, tally)
-    tally.max_by { |decision, count| count }[0]
-  end
-
-  def make_random_move
-    [:p, :s, :r].sample
+    if tally.values.reduce(:+) <= 1
+      play_gt_optimal
+    else
+      highest_tally_number = tally.values.max
+      tally.select { |decision, count| count == highest_tally_number }.keys.sample
+    end
   end
 end

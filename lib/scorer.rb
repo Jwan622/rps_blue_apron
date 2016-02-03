@@ -3,11 +3,11 @@ class Scorer
 
   def evaluate_round(comp_decision, user_input)
     if comp_decision == user_input
-      :tie
+      { winner: :tie, declaration: "It's a tie!" }
     elsif BEATS[comp_decision] == user_input
-      :computer
+      { winner: :computer, declaration: "Computer wins!" }
     else
-      :user
+      { winner: :user, declaration: "You win!" }
     end
   end
 end

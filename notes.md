@@ -1,6 +1,22 @@
 ## Notes
 - Abiding by SOLID principles as best as I can in this coding project, especially SRP and open-closed principle.
-- @computer is polymorphic. Same interface but different underlying computer_strategy
+- @computer is polymorphic. Same interface but different underlying computer_strategy. Every computer has a make_decision method implemented.
+
+```ruby
+@comp_decision = computer.make_decision(user_input, moves_tracker.tally)
+```
+
 - RpsGame acts like the controller in a Rails app. It dips into the different models.
 - scorer and scorekeeper are separate because there might be different scoring mechanisms in the future and keeping score seem like different responsibilities
 - Coding to an interface is an integral part of SOLID Principles, namely the open-closed principle. I do this in the computer_strategies with the make_decision method... that allows the rps_game class to be closed for modification but open for extension.
+- All strategies inherit from a Computer class with some base strategies that should be common to all computers.
+
+
+#### Some smaller specific decisions:
+- I put this line right after we know we have valid user input and before any computer strategy logic:
+
+```ruby
+moves_tracker.update(user_input)
+```
+
+The reason why is that the users tally of moves can then be sent to the computer so that the computer's strategy can use the updated user's tally in its algorithm. At the start of the game, and after the user's first move, the programmer can then decide to play a random move since the user's first move should really have no consequence on the computer's algorithm. For example, a favorite algorithm really shouldn't already know the player's favorite move after move 1 because the two should be playing simultaneously. It's only after the first move that the computer should know what the user's favorites are. Alternatively, the programmer can program a god-mode computer who always wins.
