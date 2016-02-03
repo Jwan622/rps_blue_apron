@@ -13,12 +13,16 @@ describe RpsGame do
     expect(@rps.scorer).to be_truthy
   end
 
-  it "has messages" do
-    expect(@rps.messages).to be_truthy
+  it "has a score_keeper" do
+    expect(@rps.score_keeper).to be_truthy
   end
 
   it "has a scorer" do
     expect(@rps.scorer).to be_truthy
+  end
+
+  it "has a moves tracker" do
+    expect(@rps.moves_tracker).to be_truthy
   end
 
   it "has an input evaluator" do
