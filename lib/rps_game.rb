@@ -2,6 +2,8 @@ require_relative 'strategy_selector'
 require_relative 'scorer'
 require_relative 'messages'
 require_relative 'input_evaluator'
+require_relative 'moves_tracker'
+require_relative 'score_keeper'
 
 class RpsGame
   attr_reader :strategy_selector,
@@ -10,7 +12,8 @@ class RpsGame
               :computer,
               :user_input,
               :input_evaluator,
-              # :moves_tracker,
+              :moves_tracker,
+              :score_keeper,
               :input_stream,
               :output_stream
 
@@ -19,9 +22,10 @@ class RpsGame
     @output_stream = output_stream
     @strategy_selector = StrategySelector.new(difficulty)
     @scorer = Scorer.new
+    @score_keeper = ScoreKeeper.new
     @messages = Messages.new(output_stream)
     @input_evaluator = InputEvaluator.new
-    # @moves_tracker = MovesTracker.new
+    @moves_tracker = MovesTracker.new
     @user_input = ''
   end
 
@@ -43,8 +47,8 @@ class RpsGame
         comp_decision = computer.make_decision(user_input, moves_tracker.tally)
       end
       victor_of_round = scorer.evaluate_round(comp_decision, user_input)
-      # current_standings = score_keeper.update(victor_of_round)
-      # messages.announce_score(current_standings)
+      current_standings = score_keeper.increments(victor_of_round)
+      messages.announce_score(current_standings)
     end
     messages.end_game
   end

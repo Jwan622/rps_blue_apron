@@ -22,4 +22,8 @@ class Messages
   def end_game
     output_stream.puts "Thanks for playing. Goodbye!"
   end
+
+  def announce_score(standings)
+    "You won #{standings[:user]} times.\nYou lost #{standings[:computer]} times.\nWe tied #{standings[:tie]} times.\n"
+  end
 end
