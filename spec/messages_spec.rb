@@ -17,7 +17,3 @@ describe Messages do
     expect(Messages.end_game).to eql("Thanks for playing. Goodbye!")
   end
 end
-
-
-# expect { Messages.introduction("favorite") }.
-#   to output("You are playing against strategy favorite.\nType 'r', 'p' or 's'.\n").to_stdout_from_any_process
