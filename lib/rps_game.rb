@@ -10,7 +10,7 @@ class RpsGame
               :computer,
               :user_input,
               :input_evaluator,
-              :moves_tracker
+              # :moves_tracker,
               :input_stream,
               :output_stream
 
@@ -21,7 +21,7 @@ class RpsGame
     @scorer = Scorer.new
     @messages = Messages.new(output_stream)
     @input_evaluator = InputEvaluator.new
-    @moves_tracker = MovesTracker.new
+    # @moves_tracker = MovesTracker.new
     @user_input = ''
   end
 
@@ -29,12 +29,12 @@ class RpsGame
     @computer = strategy_selector.determine_strategy
     messages.introduction(computer.strategy_name)
 
-    @user_input = input_stream.gets.chomp
-    while user_input != "q"
+    @user_input = input_stream.gets.chomp.to_sym
+    while user_input != :q
 
       while input_evalutor.is_invalid?(user_input)
         messages.invalid_input
-        @user_input = input_stream.gets.chomp
+        @user_input = input_stream.gets.chomp.to_sym
       end
       moves_tracker.update(user_input)
       if moves_tracker.tally.values.all? {|number| number == 0}
@@ -42,7 +42,7 @@ class RpsGame
       else
         comp_decision = computer.make_decision(user_input, moves_tracker.tally)
       end
-      # victor_of_round = scorer.evaluate_round(comp_decision, user_input)
+      victor_of_round = scorer.evaluate_round(comp_decision, user_input)
       # current_standings = score_keeper.update(victor_of_round)
       # messages.announce_score(current_standings)
     end
