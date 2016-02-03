@@ -4,12 +4,14 @@ require_relative 'messages'
 require_relative 'input_evaluator'
 require_relative 'moves_tracker'
 require_relative 'score_keeper'
+require_relative 'printer'
 
 class RpsGame
   attr_reader :strategy_selector,
               :scorer,
               :computer,
               :user_input,
+              :printer,
               :input_evaluator,
               :moves_tracker,
               :score_keeper,
@@ -21,6 +23,7 @@ class RpsGame
     @output_stream = output_stream
     @strategy_selector = StrategySelector.new(difficulty)
     @scorer = Scorer.new
+    @printer = Printer.new(output_stream)
     @score_keeper = ScoreKeeper.new
     @input_evaluator = InputEvaluator.new
     @moves_tracker = MovesTracker.new
@@ -29,13 +32,13 @@ class RpsGame
 
   def play
     @computer = strategy_selector.determine_strategy
-    Messages.introduction(computer.strategy_name)
+    printer.print(Messages.introduction(computer.strategy_name))
 
     @user_input = input_stream.gets.chomp.to_sym
     while user_input != :q
 
       while input_evalutor.is_invalid?(user_input)
-        Messages.invalid_input
+        printer.print(Messages.invalid_input)
         @user_input = input_stream.gets.chomp.to_sym
       end
       moves_tracker.update(user_input)
@@ -46,9 +49,9 @@ class RpsGame
       end
       victor_of_round = scorer.evaluate_round(comp_decision, user_input)
       current_standings = score_keeper.increments(victor_of_round)
-      messages.announce_score(current_standings)
+      printer.print(Messages.announce_score(current_standings))
     end
-    Messages.end_game
+    printer.print(Messages.end_game)
   end
 
   private
