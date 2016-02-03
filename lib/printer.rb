@@ -5,7 +5,7 @@ class Printer
     @output_stream = output_stream
   end
 
-  def output(message)
+  def print(message)
     output_stream.puts(message)
   end
 end

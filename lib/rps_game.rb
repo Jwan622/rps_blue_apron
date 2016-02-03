@@ -32,13 +32,13 @@ class RpsGame
 
   def play
     @computer = strategy_selector.determine_strategy
-    printer.output(Messages.introduction(computer.strategy_name))
+    printer.print(Messages.introduction(computer.strategy_name))
 
     @user_input = input_stream.gets.chomp.to_sym
     while user_input != :q
 
       while input_evalutor.is_invalid?(user_input)
-        printer.output(Messages.invalid_input)
+        printer.print(Messages.invalid_input)
         @user_input = input_stream.gets.chomp.to_sym
       end
       moves_tracker.update(user_input)
@@ -49,9 +49,9 @@ class RpsGame
       end
       victor_of_round = scorer.evaluate_round(comp_decision, user_input)
       current_standings = score_keeper.increments(victor_of_round)
-      printer.output(Messages.announce_score(current_standings))
+      printer.print(Messages.announce_score(current_standings))
     end
-    printer.output(Messages.end_game)
+    printer.print(Messages.end_game)
   end
 
   private
