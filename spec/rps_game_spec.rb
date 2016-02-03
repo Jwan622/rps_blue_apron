@@ -5,8 +5,8 @@ describe RpsGame do
     @rps = RpsGame.new("favorite")
   end
 
-  it "has a computer" do
-    expect(@rps.computer).to be_truthy
+  it "has a strategy selector" do
+    expect(@rps.strategy_selector).to be_truthy
   end
 
   it "has a score" do
@@ -15,5 +15,13 @@ describe RpsGame do
 
   it "has messages" do
     expect(@rps.messages).to be_truthy
+  end
+
+  it "has a scorer" do
+    expect(@rps.scorer).to be_truthy
+  end
+
+  it "has an input evaluator" do
+    expect(@rps.input_evaluator).to be_truthy
   end
 end
