@@ -13,7 +13,7 @@ class ComputerLast < ComputerBase
 
   def make_decision(tally)
     throw_difference = last_tally.merge(tally) {|key, old_throws, new_throws| new_throws - old_throws }
-    @last_tally = tally
+    @last_tally = tally.dup
     if second_to_last_move.nil?
       comp_move = play_gt_optimal
     else
