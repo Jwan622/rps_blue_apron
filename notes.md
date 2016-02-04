@@ -1,6 +1,8 @@
 ## Notes
+
+#### High-level decisions
 - Abiding by SOLID principles as best as I can in this coding project, especially SRP and open-closed principle.
-- @computer is polymorphic. Same interface but different underlying computer_strategy. Every computer has a make_decision method implemented.
+- @computer in the RpsGame class implements polymorphism. Regardless of the underlying object, it has the same interface. Every computer has a .make_decision method implemented.
 
 ```ruby
 @comp_decision = computer.make_decision(user_input, moves_tracker.tally)
@@ -20,3 +22,30 @@ moves_tracker.update(user_input)
 ```
 
 The reason why is that the users tally of moves can then be sent to the computer so that the computer's strategy can use the updated user's tally in its algorithm. At the start of the game, and after the user's first move, the programmer can then decide to play a random move since the user's first move should really have no consequence on the computer's algorithm. For example, a favorite algorithm really shouldn't already know the player's favorite move after move 1 because the two should be playing simultaneously. It's only after the first move that the computer should know what the user's favorites are. Alternatively, the programmer can program a god-mode computer who always wins.
+- had a decision to put last_tally differential in either moves tracker or the computer_last file. Ultimately chose to make it in computer_last because I think moves_tracker should only keep tracker of the total number of player moves.
+
+
+
+#### Some tricky bugs at some point
+1. I had this bug for a bit and it had to do with variable pointers:
+
+```ruby
+def make_decision(tally)
+  throw_difference = last_tally.merge(tally) {|key, old_throws, new_throws| new_throws - old_throws }
+  @last_tally = tally
+  if second_to_last_move.nil?
+    comp_move = play_gt_optimal
+  else
+    comp_move = BEATS.key(second_to_last_move)
+  end
+  @second_to_last_move = throw_difference.max_by { |key, throws| throws }[0]
+  comp_move
+end
+```
+
+last_tally kept pointing to the same thing that tally on the second call of this method or beyond. Very strange. I need to change one line to this:
+```ruby
+@last_tally = tally.dup
+```
+
+otherwise last_tally and tally will point to same hash. On iteration two, last_tally and tally will point to the same hash which will cause throw_difference to be a hash of 0 values which causes second_to_last_move to always be :r which will then cause comp_move to always be :p. @second_to_last_move will only update correctly on the first iteration when throw_difference is not a hash of 0 values. 

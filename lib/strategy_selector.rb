@@ -1,14 +1,14 @@
-require './lib/computer_strategies/computer_favorite'
+Dir["./lib/computer_strategies/*.rb"].each {|file| require file }
 
 class StrategySelector
-  attr_reader :difficulty
+  attr_reader :strategy
 
-  def initialize(difficulty)
-    @difficulty = difficulty
+  def initialize(strategy)
+    @strategy = strategy.downcase
   end
 
-  def determine_strategy
-    case difficulty
+  def determine_computer
+    case strategy
     when "favorite"
       ComputerFavorite.new
     when "last"
