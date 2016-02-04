@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Messages do
   it "should describe the introduction message" do
-    expect(Messages.introduction("favorite")).to eql("You are playing against strategy favorite.")
+    full_intro_message_with_graphic = "===================================================================\n              __       __   __            __     _____   __     \n\\    /\\    / |    |   |    |  | |\\    /| |         |    |  |    \n \\  /  \\  /  |--  |   |    |  | | \\  / | |--       |    |  |    \n  \\/    \\/   |__  |__ |__  |__| |  \\/  | |__       |    |__|    \n                    ___    ___     ____                           \n                    |  )  |   |   |                               \n                    |_)   |___|   |                               \n                    |\\    |       |____                           \n                    | \\   |            |                          \n                    |  \\  |       _____|                          \n===================================================================\nYou are playing against strategy favorite."
+
+    expect(Messages.introduction("favorite")).to eql(full_intro_message_with_graphic)
   end
 
   it "should describe the display options" do
