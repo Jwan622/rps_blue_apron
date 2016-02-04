@@ -9,13 +9,19 @@ describe StrategySelector do
     expect(computer.strategy).to eql("some strategy")
   end
 
-  it "can return an instance of the ComputerFavorite class based on the favorite strategy" do
+  it "can return an instance of the ComputerFavorite class" do
     strat_selector_fav = StrategySelector.new("favorite")
 
     expect(strat_selector_fav.determine_computer).to be_an(ComputerFavorite)
   end
 
-  it "can return an instance of the ComputerFavorite class based on the favorite strategy" do
+  it "can return an instance of the ComputerLast class" do
+    strat_selector_last = StrategySelector.new("last")
+
+    expect(strat_selector_last.determine_computer).to be_an(ComputerLast)
+  end
+
+  it "can return an instance of the ComputerChamp class" do
     strat_selector_last = StrategySelector.new("last")
 
     expect(strat_selector_last.determine_computer).to be_an(ComputerLast)
