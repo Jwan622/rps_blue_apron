@@ -13,6 +13,8 @@ class StrategySelector
       ComputerFavorite.new
     when "last"
       ComputerLast.new
+    when "champ"
+      ComputerChamp.new
     end
   end
 end
