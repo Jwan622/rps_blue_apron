@@ -1,14 +1,14 @@
-#### Rock Paper Scissors
+### Rock Paper Scissors
 
 Write a Rock Paper Scissors game. The game can be instantiated with various strategies. Below are two strategies for you to write, and an example of how players interact with the game.
 
-Strategy 1: Beat Their Last Move.
+**Strategy 1: Beat Their Last Move.**
 Here you will play the move that beats their last move.
 
-Strategy 2: Beat Their Favorite.
+**Strategy 2: Beat Their Favorite.**
 Here you will play the move that beats their most frequent move.
 
-Strategy 3: Extra Credit.
+**Strategy 3: Extra Credit.**
 Come up with your own strategy if you have time.
 
 Interacting with your game
@@ -32,10 +32,12 @@ we tied 1 times.
 >
 ```
 
-Notes
+### Notes
 
-Write tests for your implementation.
-Focus on clean, clear code. Your code should exhibit strong Object Oriented design. However, if you decide to pursue another design strategy, please explain.
-Questions
+1. Write tests for your implementation.
+2. Focus on clean, clear code. Your code should exhibit strong Object Oriented design. However, if you decide to pursue another design strategy, please explain.
+
+
+### Questions
 
 Try not to ask any questions about the above. If something feels unclear, take it in any direction you like.
