@@ -11,15 +11,15 @@ class Messages
     "Your input is invalid."
   end
 
-  def self.computer_play_and_eval(comp_decision, victor_of_round)
-    "I chose #{comp_decision.to_s}. " + victor_of_round[:declaration]
+  def self.computer_play_and_eval(comp_decision, victor)
+    "I chose #{comp_decision}. " + victor
   end
 
   def self.end_game
     "Thanks for playing. Goodbye!"
   end
 
-  def self.announce_score(standings)
-    "You won #{standings[:user]} times.\nYou lost #{standings[:computer]} times.\nWe tied #{standings[:tie]} times.\n"
+  def self.announce_score(user_score, computer_score, tie_score)
+    "You won #{user_score} times.\nYou lost #{computer_score} times.\nWe tied #{tie_score} times.\n"
   end
 end

@@ -18,12 +18,16 @@ describe Messages do
   end
 
   it "should state the play and the winner" do
-    expect(Messages.computer_play_and_eval(:s, { winner: :user, declaration: "You win!" })).to eql("I chose s. You win!")
-    expect(Messages.computer_play_and_eval(:p, { winner: :computer, declaration: "Computer wins!" })).to eql("I chose p. Computer wins!")
-    expect(Messages.computer_play_and_eval(:r, { winner: :tie, declaration: "It's a tie!" })).to eql("I chose r. It's a tie!")
+    expect(Messages.computer_play_and_eval(:s, "You win!")).to eql("I chose s. You win!")
+    expect(Messages.computer_play_and_eval(:p, "Computer wins!")).to eql("I chose p. Computer wins!")
+    expect(Messages.computer_play_and_eval(:r, "It's a tie!" )).to eql("I chose r. It's a tie!")
   end
 
   it "should announce score" do
-    expect(Messages.announce_score({ user: 2, computer: 3, tie: 0 })).to eql("You won 2 times.\nYou lost 3 times.\nWe tied 0 times.\n")
+    user_score = 2
+    computer_score = 3
+    tie_score = 0
+
+    expect(Messages.announce_score(user_score, computer_score, tie_score)).to eql("You won 2 times.\nYou lost 3 times.\nWe tied 0 times.\n")
   end
 end

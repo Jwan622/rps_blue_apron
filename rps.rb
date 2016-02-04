@@ -2,8 +2,7 @@ require './lib/rps_game.rb'
 
 class RpsRunner
   def start(difficulty, input_stream, output_stream)
-    rps_game = RpsGame.new(difficulty, input_stream, output_stream)
-    rps_game.play
+    RpsGame.new(difficulty, input_stream, output_stream).play
   end
 end
 

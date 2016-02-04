@@ -19,12 +19,12 @@ class RpsGame
               :user_input,
               :comp_decision
 
-  def initialize(difficulty, input_stream = $stdin, output_stream = $stdout)
+  def initialize(strategy, input_stream = $stdin, output_stream = $stdout)
     @input_stream = input_stream
     @output_stream = output_stream
     @scorer = Scorer.new
-    @strategy_selector = StrategySelector.new(difficulty)
-    @computer = strategy_selector.determine_strategy
+    @strategy_selector = StrategySelector.new(strategy)
+    @computer = strategy_selector.determine_computer
     @printer = Printer.new(output_stream)
     @score_keeper = ScoreKeeper.new
     @input_evaluator = InputEvaluator.new
@@ -52,14 +52,14 @@ class RpsGame
 
   def track_user_move_and_computer_responds
     moves_tracker.update(user_input)
-    @comp_decision = computer.make_decision(user_input, moves_tracker.tally)
+    @comp_decision = computer.make_decision(moves_tracker.tally)
   end
 
   def declare_winner_and_update_score
     victor_and_declaration = scorer.evaluate_round(comp_decision, user_input)
-    printer.print(Messages.computer_play_and_eval(comp_decision, victor_and_declaration))
+    printer.print(Messages.computer_play_and_eval(comp_decision.to_s, victor_and_declaration[:declaration]))
     current_standings = score_keeper.increments(victor_and_declaration)
-    printer.print(Messages.announce_score(current_standings))
+    printer.print(Messages.announce_score(current_standings[:user], current_standings[:computer], current_standings[:tie]))
   end
 
   def obtain_valid_user_input
