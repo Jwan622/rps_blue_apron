@@ -1,3 +1,36 @@
+## Instructions
+
+In order to run the game, clone this repo and type this in the command line inside the root folder:
+
+```ruby
+ruby rbs.rb
+```
+
+or with a selected strategy:
+
+```ruby
+ruby rbs.rb favorite
+```
+
+or
+
+```ruby
+ruby rbs.rb last
+```
+
+```ruby
+ruby rbs.rb champ
+```
+
+You can also supply input and output streams:
+
+```ruby
+ruby rbs.rb favorite $stdin $stdout
+```
+
+If you input an invalid strategy or stream, defaults will be chosen for you. Currently the only input and output streams supported at $stdin and $stdout. The only strategies supported right now are favorite, last, and champ. Good luck!
+
+
 ### Rock Paper Scissors
 
 Write a Rock Paper Scissors game. The game can be instantiated with various strategies. Below are two strategies for you to write, and an example of how players interact with the game.
