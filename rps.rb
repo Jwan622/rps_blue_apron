@@ -1,11 +1,15 @@
-require './lib/rps_game.rb'
+require './lib/rps_game'
+require './lib/argv_checker'
 
 class RpsRunner
-  def start(difficulty, input_stream, output_stream)
-    RpsGame.new(difficulty, input_stream, output_stream).play
+  def start(strategy, input_stream, output_stream)
+    RpsGame.new(strategy, input_stream, output_stream).play
   end
 end
 
-input_stream = $stdin if ARGV[1].nil?
-output_stream = $stdout if ARGV[2].nil?
-RpsRunner.new.start(ARGV[0], input_stream, output_stream)
+cleaned_argv = ARGVChecker.process(ARGV)
+strategy, input_stream, output_stream = cleaned_argv[0], cleaned_argv[1], cleaned_argv[2]
+puts Messages.invalid_strategy if strategy != ARGV[0]
+puts Messages.invalid_input_stream if input_stream != ARGV[1] && ARGV[1] != nil
+puts Messages.invalid_output_stream if output_stream != ARGV[2] && ARGV[1] != nil
+RpsRunner.new.start(strategy, input_stream, output_stream)

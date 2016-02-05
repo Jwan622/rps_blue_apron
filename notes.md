@@ -11,7 +11,7 @@
 - RpsGame acts like the controller in a Rails app. It dips into the different models.
 - scorer and scorekeeper are separate because there might be different scoring mechanisms in the future and keeping score seem like different responsibilities
 - Coding to an interface is an integral part of SOLID Principles, namely the open-closed principle. I do this in the computer_strategies with the make_decision method... that allows the rps_game class to be closed for modification but open for extension.
-- All strategies inherit from a Computer class with some base strategies that should be common to all computers.
+- All strategies inherit from a Computer class that has a GTO base strategy (it can never actually get a real edge) and a BEATS hash that says whether rock beats paper, etc. This info should be common to all computer strategies and so I created a base computer that be inherited from.
 
 
 #### Some smaller specific decisions:
