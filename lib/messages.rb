@@ -34,4 +34,16 @@ class Messages
   def self.announce_score(user_score, computer_score, tie_score)
     "You won #{user_score} times.\nYou lost #{computer_score} times.\nWe tied #{tie_score} times.\n"
   end
+
+  def self.invalid_strategy
+    "The strategy you passed in was invalid so a random strategy was selected for you. Good luck!"
+  end
+
+  def self.invalid_input_stream
+    "The input stream you passed in was invalid so you will have to provide your own choices via the keyboard."
+  end
+
+  def self.invalid_output_stream
+    "The output stream you passed in was invalid so the output will be displayed on your terminal."
+  end
 end
